@@ -5,17 +5,31 @@
  */
 package com.bank.view;
 
+import com.bank.model.BankUserDAO;
+import com.bank.model.BankUserDTO;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ad
  */
-public class Login extends javax.swing.JFrame {
-
+public class Login extends javax.swing.JFrame implements ActionListener {
+    BankUserDTO dto;
+    BankUserDAO dao;
+    BankMain f;
     /**
      * Creates new form Login
      */
     public Login() {
+        super("BANK");
         initComponents();
+        init();
+        addMotion();
     }
 
     /**
@@ -30,27 +44,27 @@ public class Login extends javax.swing.JFrame {
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        laid = new javax.swing.JLabel();
+        lapwd = new javax.swing.JLabel();
+        tfid = new javax.swing.JTextField();
+        tfpwd = new javax.swing.JPasswordField();
+        btlogin = new javax.swing.JButton();
+        btsearch = new javax.swing.JButton();
+        btjoin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setIcon(new javax.swing.ImageIcon("D:\\lecture\\workspace_list\\nb_ws\\MyProject\\images\\bank.jpg")); // NOI18N
 
-        jLabel2.setText("아이디");
+        laid.setText("아이디");
 
-        jLabel3.setText("비밀번호");
+        lapwd.setText("비밀번호");
 
-        jButton1.setText("로그인");
+        btlogin.setText("로그인");
 
-        jButton2.setText("ID/PWD 찾기");
+        btsearch.setText("PWD 찾기");
 
-        jButton3.setText("회원가입");
+        btjoin.setText("회원가입");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -61,18 +75,18 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(lapwd, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(laid, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfid, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfpwd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(32, 32, 32)
-                        .addComponent(jButton1))
+                        .addComponent(btlogin))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(btsearch)
                         .addGap(30, 30, 30)
-                        .addComponent(jButton3)
+                        .addComponent(btjoin)
                         .addGap(67, 67, 67))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -82,19 +96,19 @@ public class Login extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(laid)
+                            .addComponent(tfid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)))
+                            .addComponent(tfpwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lapwd)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
-                        .addComponent(jButton1)))
+                        .addComponent(btlogin)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton2))
+                    .addComponent(btjoin)
+                    .addComponent(btsearch))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -154,15 +168,75 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btjoin;
+    private javax.swing.JButton btlogin;
+    private javax.swing.JButton btsearch;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel laid;
+    private javax.swing.JLabel lapwd;
+    private javax.swing.JTextField tfid;
+    private javax.swing.JPasswordField tfpwd;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==btlogin){
+            try {
+                ulogin();
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        if(e.getSource()==btjoin){
+            ujoin();
+        }
+    }
+
+    private void init() {
+        dto = new BankUserDTO();
+        dao = new BankUserDAO();
+        f = new BankMain();
+    }
+    
+    
+    private void addMotion() {
+        btlogin.addActionListener(this);
+        btjoin.addActionListener(this);
+        
+    }
+
+
+    private void ulogin() throws SQLException {
+        String id = tfid.getText();
+        String pwd = tfpwd.getText();
+        
+        if(id==null || id.isEmpty()){
+            JOptionPane.showMessageDialog(this, "아이디를 입력하세요");
+            tfid.requestFocus();
+            return;
+        }
+        
+        if(pwd==null || pwd.isEmpty()){
+            JOptionPane.showMessageDialog(this, "비밀번호를 입력하세요");
+            tfpwd.requestFocus();
+            return;
+        }
+        
+        dto.setId(id);
+        dto.setPwd(pwd);
+        if(dao.userLogin(dto)){
+            f.show();
+        }
+        else
+            JOptionPane.showMessageDialog(this, "아이디 또는 비밀번호가 올바르지 않습니다.");
+            
+    }
+
+    private void ujoin() {
+        
+    }
+
 }

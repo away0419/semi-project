@@ -39,7 +39,7 @@ public class BankUserDAO {
         try {
             Connection conn = DBUtil.getConnection();
             
-            String sql = "select 1 from bankuser where id=? and pwd='?'";
+            String sql = "select 1 from bankuser where id=? and pwd=?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, dto.getId());
             ps.setString(2, dto.getPwd());
