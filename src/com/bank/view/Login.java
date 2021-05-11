@@ -7,8 +7,10 @@ package com.bank.view;
 
 import com.bank.model.BankUserDAO;
 import com.bank.model.BankUserDTO;
+import com.bank.model.BankUserService;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,7 +20,7 @@ import javax.swing.JOptionPane;
  *
  * @author ad
  */
-public class Login extends javax.swing.JFrame implements ActionListener {
+public class Login extends javax.swing.JFrame implements ActionListener{
     BankUserDTO dto;
     BankUserDAO dao;
     BankMain f;
@@ -193,18 +195,21 @@ public class Login extends javax.swing.JFrame implements ActionListener {
         if(e.getSource()==btjoin){
             ujoin();
         }
+        if(e.getSource()==btsearch){
+            usearch();
+        }
     }
 
     private void init() {
         dto = new BankUserDTO();
         dao = new BankUserDAO();
-        f = new BankMain();
     }
     
     
     private void addMotion() {
         btlogin.addActionListener(this);
         btjoin.addActionListener(this);
+        btsearch.addActionListener(this);
         
     }
 
@@ -225,10 +230,16 @@ public class Login extends javax.swing.JFrame implements ActionListener {
             return;
         }
         
+        
+        
         dto.setId(id);
         dto.setPwd(pwd);
         if(dao.userLogin(dto)){
-            f.show();
+            BankUserService.setUserid(id);
+            
+            f = new BankMain();
+            f.setVisible(true);
+            this.dispose();
         }
         else
             JOptionPane.showMessageDialog(this, "아이디 또는 비밀번호가 올바르지 않습니다.");
@@ -236,7 +247,14 @@ public class Login extends javax.swing.JFrame implements ActionListener {
     }
 
     private void ujoin() {
-        
+        Join j = new Join();
+        j.setVisible(true);
     }
+
+    private void usearch() {
+        IdPwdSearch i = new IdPwdSearch();
+        i.setVisible(true);
+    }
+
 
 }

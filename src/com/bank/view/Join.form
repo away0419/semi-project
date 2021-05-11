@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.JPasswordField" name="jPasswordField1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jPasswordField1"/>
+      </Properties>
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -24,38 +31,95 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="lapwd" min="-2" max="-2" attributes="0"/>
-                  <Component id="laid" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="btjoin" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
-                      <Component id="btcancel" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="tfid" min="-2" pref="104" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                          <Component id="btoverlap" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="laid" min="-2" pref="48" max="-2" attributes="0"/>
+                          <Component id="lapwd" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="tfpwd" min="-2" pref="104" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="tfjumin1" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="tfemail1" max="32767" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="cbtel1" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="tftel2" min="-2" pref="52" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="btjoin" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="tfjumin2" min="-2" pref="104" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="tftel3" min="-2" pref="52" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="cbemail2" min="-2" pref="90" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="tfemail3" min="-2" pref="86" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                                      <Component id="btcancel" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="tfpwd" alignment="0" pref="133" max="32767" attributes="0"/>
+                                  <Component id="tfname" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="tfid" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="btoverlap" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="lajumin" max="32767" attributes="0"/>
+                              <Component id="latel" alignment="0" max="32767" attributes="0"/>
+                              <Component id="laemail" alignment="0" max="32767" attributes="0"/>
+                              <Component id="laname" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lapwdcheck" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="tfpwdcheck" min="-2" pref="133" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="lapwdequals" min="-2" pref="95" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="62" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="laid" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="tfid" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="laid" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btoverlap" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -63,7 +127,40 @@
                   <Component id="lapwd" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="tfpwd" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="95" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lapwdcheck" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfpwdcheck" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lapwdequals" alignment="3" min="-2" pref="21" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="tfname" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="laname" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="tfjumin1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lajumin" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfjumin2" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="tftel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="latel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbtel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tftel3" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="tfemail1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="laemail" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbemail2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfemail3" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="41" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btjoin" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btcancel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -76,6 +173,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="laid">
       <Properties>
+        <Property name="horizontalAlignment" type="int" value="2"/>
         <Property name="text" type="java.lang.String" value="&#xc544;&#xc774;&#xb514;"/>
       </Properties>
     </Component>
@@ -86,7 +184,7 @@
         <Property name="text" type="java.lang.String" value="&#xbe44;&#xbc00;&#xbc88;&#xd638;"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfpwd">
+    <Component class="javax.swing.JPasswordField" name="tfpwd">
     </Component>
     <Component class="javax.swing.JButton" name="btjoin">
       <Properties>
@@ -102,6 +200,89 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="&#xc911;&#xbcf5;&#xd655;&#xc778;"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="laname">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xc774;&#xb984;"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfname">
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfjumin1">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lajumin">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xc8fc;&#xbbfc;&#xbc88;&#xd638;"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="-"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="tfjumin2">
+    </Component>
+    <Component class="javax.swing.JLabel" name="latel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xc804;&#xd654;&#xbc88;&#xd638;"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tftel2">
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cbtel1">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="3">
+            <StringItem index="0" value="010"/>
+            <StringItem index="1" value="011"/>
+            <StringItem index="2" value="012"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tftel3">
+    </Component>
+    <Component class="javax.swing.JLabel" name="laemail">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xc774;&#xba54;&#xc77c;"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cbemail2">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="5">
+            <StringItem index="0" value="naver.com"/>
+            <StringItem index="1" value="daum.net"/>
+            <StringItem index="2" value="gmail.com"/>
+            <StringItem index="3" value="join.com"/>
+            <StringItem index="4" value="&#xc9c1;&#xc811;&#xc785;&#xb825;"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfemail1">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="@"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfemail3">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lapwdcheck">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xbe44;&#xbc00;&#xbc88;&#xd638; &#xd655;&#xc778;"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="tfpwdcheck">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lapwdequals">
     </Component>
   </SubComponents>
 </Form>

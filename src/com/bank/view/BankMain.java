@@ -5,6 +5,8 @@
  */
 package com.bank.view;
 
+import com.bank.model.BankUserService;
+
 /**
  *
  * @author ad
@@ -16,6 +18,8 @@ public class BankMain extends javax.swing.JFrame {
      */
     public BankMain() {
         initComponents();
+        init();
+        addEvent();
     }
 
     /**
@@ -33,7 +37,7 @@ public class BankMain extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lausername = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
@@ -60,7 +64,7 @@ public class BankMain extends javax.swing.JFrame {
             .addGap(0, 78, Short.MAX_VALUE)
         );
 
-        jLabel1.setText("고객님");
+        lausername.setText("고객님");
 
         jLabel2.setText("환영합니다!");
 
@@ -72,14 +76,14 @@ public class BankMain extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(lausername))
                 .addContainerGap(48, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(lausername)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addContainerGap(45, Short.MAX_VALUE))
@@ -229,7 +233,6 @@ public class BankMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -241,5 +244,13 @@ public class BankMain extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JLabel lausername;
     // End of variables declaration//GEN-END:variables
+
+    private void addEvent() {
+    }
+
+    private void init() {
+        lausername.setText(BankUserService.getUserid()+" 고객님");
+    }
 }

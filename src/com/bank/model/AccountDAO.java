@@ -7,8 +7,8 @@ package com.bank.model;
 
 /**
  *
- * @author ad
+ * @author knit
  */
-public class BankAccountDAO {
+public class AccountDAO {
     
 }
