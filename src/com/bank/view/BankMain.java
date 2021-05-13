@@ -5,14 +5,31 @@
  */
 package com.bank.view;
 
+import com.bank.model.AccountDAO;
+import com.bank.model.AccountDTO;
+import com.bank.model.BankUserDAO;
+import com.bank.model.BankUserDTO;
 import com.bank.model.BankUserService;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author ad
  */
-public class BankMain extends javax.swing.JFrame {
-
+public class BankMain extends javax.swing.JFrame implements ActionListener, KeyListener{
+    BankUserDTO dto;
+    BankUserDAO dao;
+    BankUserDTO userdto;
+    AccountDTO acdto;
+    AccountDAO acdao;
+    String loginid = BankUserService.getUserid();
     /**
      * Creates new form bankMain
      */
@@ -42,7 +59,17 @@ public class BankMain extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        cbaccounttype = new javax.swing.JComboBox<>();
+        tfaccountpwd = new javax.swing.JPasswordField();
+        tfaccountpwdc = new javax.swing.JPasswordField();
+        btaccountopen = new javax.swing.JButton();
+        lapwdequals = new javax.swing.JLabel();
+        lausername2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -96,7 +123,7 @@ public class BankMain extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 331, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 350, Short.MAX_VALUE)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -168,29 +195,92 @@ public class BankMain extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("이체", jPanel2);
 
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 858, Short.MAX_VALUE)
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 388, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("금융상품", jPanel9);
+
+        jLabel1.setText("계좌 종류");
+
+        jLabel3.setText("계좌 비밀번호");
+
+        jLabel4.setText("비밀번호 확인");
+
+        cbaccounttype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "일반계좌", "신용계좌", "적금계좌" }));
+
+        btaccountopen.setText("개설");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 858, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(93, 93, 93)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGap(64, 64, 64)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(tfaccountpwd, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbaccounttype, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tfaccountpwdc))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lapwdequals))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(313, 313, 313)
+                        .addComponent(btaccountopen)))
+                .addContainerGap(488, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 503, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(cbaccounttype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(tfaccountpwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(tfaccountpwdc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lapwdequals))
+                .addGap(106, 106, 106)
+                .addComponent(btaccountopen)
+                .addContainerGap(108, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("금융상품", jPanel3);
+        jTabbedPane1.addTab("계좌개설", jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jTabbedPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(lausername2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 94, Short.MAX_VALUE)
+                .addGap(0, 64, Short.MAX_VALUE)
+                .addComponent(lausername2)
+                .addGap(30, 30, 30)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -233,7 +323,12 @@ public class BankMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btaccountopen;
+    private javax.swing.JComboBox<String> cbaccounttype;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -242,15 +337,127 @@ public class BankMain extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JLabel lapwdequals;
     private javax.swing.JLabel lausername;
+    private javax.swing.JLabel lausername2;
+    private javax.swing.JPasswordField tfaccountpwd;
+    private javax.swing.JPasswordField tfaccountpwdc;
     // End of variables declaration//GEN-END:variables
 
-    private void addEvent() {
-    }
 
     private void init() {
-        lausername.setText(BankUserService.getUserid()+" 고객님");
+        dto = new BankUserDTO();
+        dao = new BankUserDAO();
+        acdao = new AccountDAO();
+        acdto = new AccountDTO();
+        
+        try {
+            userdto= dao.loginUser(loginid);
+        } catch (SQLException ex) {
+            Logger.getLogger(BankMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        lausername.setText(userdto.getName()+" 고객님");
+        lausername2.setText(userdto.getName()+"님");
+        
+        //DecimalFormat df = new DecimalFormat("###,###");
+        //laprice.setText(loginid);
+        
+    }
+    
+    private void addEvent() {
+        btaccountopen.addActionListener(this);
+        tfaccountpwd.addKeyListener(this);
+        tfaccountpwdc.addKeyListener(this);
+        
+    }
+
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==btaccountopen){
+            try {
+                openAccount();
+            } catch (SQLException ex) {
+                Logger.getLogger(BankMain.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        if(e.getSource()==tfaccountpwd){
+            Join j = new Join();
+            String s = tfaccountpwd.getText();
+            if(!(j.digitcheck(s))){
+                tfaccountpwd.setText("");
+            }
+            else if(s.length()>4){
+                s=s.substring(0,4);
+                tfaccountpwd.setText(s);
+            }
+                
+        }else if(e.getSource()==tfaccountpwdc){
+            String p1= tfaccountpwd.getText();
+            String p2= tfaccountpwdc.getText();
+            Join j = new Join();
+            
+            if(!(j.digitcheck(p2))){
+                tfaccountpwdc.setText("");
+            }
+            else if(p2.length()>4){
+                p2=p2.substring(0,4);
+                tfaccountpwdc.setText(p2);
+            }
+            
+            if(p1.equals(p2)){
+                lapwdequals.setText("비밀번호 일치");
+            }else
+                lapwdequals.setText("비밀번호 불일치");
+        
+        }
+    }
+
+
+    private void openAccount() throws SQLException {
+        int actype = (int)cbaccounttype.getSelectedIndex()+1;
+        String pwd = tfaccountpwd.getText();
+        String pwdc = tfaccountpwdc.getText();
+        
+        
+         if(pwd==null || pwd.isEmpty() || pwd.length()!=4){
+            JOptionPane.showMessageDialog(this, "비밀번호를 확인하세요");
+            tfaccountpwd.requestFocus();
+            return;
+        }
+        if(pwdc==null || pwdc.isEmpty() || !(pwdc.equals(pwd))){
+            JOptionPane.showMessageDialog(this, "비밀번호를 확인하세요");
+            tfaccountpwdc.requestFocus();
+            return;
+        }
+        
+        acdto.setAcpwd(Integer.parseInt(pwd));
+        acdto.setTypeno(actype);
+        acdto.setUserno(userdto.getSeq());
+        
+        int j = acdao.insertAccount(acdto);
+            
+        if(j>0){
+            JOptionPane.showMessageDialog(this, "개설완료");
+        }
+        
+        
     }
 }

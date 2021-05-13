@@ -13,7 +13,7 @@ import java.sql.Timestamp;
  */
 public class AccountDTO {
     private long accountno;
-    private String acpwd;
+    private int acpwd;
     private int typeno;
     private int userno;
     private Timestamp makedate;
@@ -21,19 +21,11 @@ public class AccountDTO {
     public AccountDTO() {
     }
 
-    public AccountDTO(long accountno, String acpwd, int typeno, int userno, Timestamp makedate) {
-        this.accountno = accountno;
-        this.acpwd = acpwd;
-        this.typeno = typeno;
-        this.userno = userno;
-        this.makedate = makedate;
-    }
-
     public long getAccountno() {
         return accountno;
     }
 
-    public String getAcpwd() {
+    public int getAcpwd() {
         return acpwd;
     }
 
@@ -53,7 +45,7 @@ public class AccountDTO {
         this.accountno = accountno;
     }
 
-    public void setAcpwd(String acpwd) {
+    public void setAcpwd(int acpwd) {
         this.acpwd = acpwd;
     }
 
@@ -68,6 +60,12 @@ public class AccountDTO {
     public void setMakedate(Timestamp makedate) {
         this.makedate = makedate;
     }
+
+    @Override
+    public String toString() {
+        return "AccountDTO{" + "accountno=" + accountno + ", acpwd=" + acpwd + ", typeno=" + typeno + ", userno=" + userno + ", makedate=" + makedate + '}';
+    }
+
     
     
 }

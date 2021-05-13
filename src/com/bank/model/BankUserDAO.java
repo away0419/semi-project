@@ -75,9 +75,9 @@ public class BankUserDAO {
         Connection conn =null;
         PreparedStatement ps=null;
         ResultSet rs =null;
-        
+        boolean bool=false;
         try {
-            boolean bool=false;
+            
             conn = DBUtil.getConnection();
        
             String sql = "select * from bankuser where userid=?";
@@ -91,6 +91,7 @@ public class BankUserDAO {
             return bool;
         }finally{
             DBUtil.dbClose(rs, ps, conn);
+            
         }
     }//idCheck();
     
@@ -99,9 +100,9 @@ public class BankUserDAO {
         PreparedStatement ps=null;
         ResultSet rs =null;
         long ju= Long.parseLong(jumin);
-        
+        boolean bool=false;
         try {
-            boolean bool=false;
+            
             conn = DBUtil.getConnection();
        
             String sql = "select * from bankuser where jumin=?";
@@ -115,6 +116,7 @@ public class BankUserDAO {
             return bool;
         }finally{
             DBUtil.dbClose(rs, ps, conn);
+            
         }
     }//idCheck();
     
@@ -166,6 +168,39 @@ public class BankUserDAO {
             return dto;
         }finally{
             DBUtil.dbClose(rs, ps, conn);
+        }
+    }
+    
+    
+     public BankUserDTO loginUser(String id) throws SQLException{
+        Connection conn =null;
+        PreparedStatement ps=null;
+        ResultSet rs =null;
+        BankUserDTO userdto;
+        try {
+          
+            conn = DBUtil.getConnection();
+       
+            String sql = "select * from bankuser where userid=?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, id);
+
+            rs = ps.executeQuery();
+            userdto= new BankUserDTO();
+            if(rs.next()){
+                userdto.setSeq(rs.getInt(1));
+                userdto.setId(rs.getString(2));
+                userdto.setPwd(rs.getString(3));
+                userdto.setName(rs.getString(4));
+                userdto.setJumin(rs.getLong(5));
+                userdto.setTel(rs.getString(6));
+                userdto.setEmail(rs.getString(7));
+                userdto.setJoindate(rs.getTimestamp(8));
+            }
+            return userdto;
+        }finally{
+            DBUtil.dbClose(rs, ps, conn);
+            
         }
     }
 }
