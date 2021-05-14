@@ -14,11 +14,20 @@ import java.sql.Timestamp;
 public class AccountDTO {
     private long accountno;
     private int acpwd;
+    private long price;
     private int typeno;
     private int userno;
     private Timestamp makedate;
 
     public AccountDTO() {
+    }
+
+    public void setPrice(long price) {
+        this.price = price;
+    }
+
+    public long getPrice() {
+        return price;
     }
 
     public long getAccountno() {
@@ -63,8 +72,10 @@ public class AccountDTO {
 
     @Override
     public String toString() {
-        return "AccountDTO{" + "accountno=" + accountno + ", acpwd=" + acpwd + ", typeno=" + typeno + ", userno=" + userno + ", makedate=" + makedate + '}';
+        return "AccountDTO{" + "accountno=" + accountno + ", acpwd=" + acpwd + ", price=" + price + ", typeno=" + typeno + ", userno=" + userno + ", makedate=" + makedate + '}';
     }
+
+    
 
     
     

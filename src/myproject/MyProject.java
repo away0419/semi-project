@@ -6,6 +6,7 @@
 package myproject;
 
 import com.bank.view.BankMain;
+import com.bank.view.Join;
 import com.bank.view.Login;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -43,8 +44,9 @@ public class MyProject extends JApplet {
                     UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
                 } catch (Exception e) {
                 }
-                //BankMain f = new BankMain();
-                Login f = new Login();
+               //BankMain f = new BankMain();
+               Login f = new Login();
+               // Join f = new Join();
                 f.show();
             }
         });

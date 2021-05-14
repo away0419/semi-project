@@ -15,6 +15,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -29,7 +31,10 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
     BankUserDTO userdto;
     AccountDTO acdto;
     AccountDAO acdao;
+    List<AccountDTO> listac;
     String loginid = BankUserService.getUserid();
+    
+    
     /**
      * Creates new form bankMain
      */
@@ -53,9 +58,12 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        lapricesum = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         lausername = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -80,15 +88,28 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("총 잔액"));
 
+        jLabel5.setText("원");
+
+        lapricesum.setText("0");
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 175, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addGap(0, 135, Short.MAX_VALUE)
+                .addComponent(lapricesum)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 78, Short.MAX_VALUE)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(lapricesum))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         lausername.setText("고객님");
@@ -122,9 +143,12 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 350, Short.MAX_VALUE)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 360, Short.MAX_VALUE)
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -134,7 +158,9 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(368, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane2.addTab("계좌조회", jPanel4);
@@ -329,6 +355,7 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -338,8 +365,10 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JLabel lapricesum;
     private javax.swing.JLabel lapwdequals;
     private javax.swing.JLabel lausername;
     private javax.swing.JLabel lausername2;
@@ -353,13 +382,23 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
         dao = new BankUserDAO();
         acdao = new AccountDAO();
         acdto = new AccountDTO();
+        listac = new ArrayList<>();
         
         try {
             userdto= dao.loginUser(loginid);
+            listac = acdao.userAcList(userdto.getSeq());
         } catch (SQLException ex) {
             Logger.getLogger(BankMain.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        if(!(listac.isEmpty())){
+            long sum =0;
+            for(AccountDTO n : listac){
+                sum+= n.getPrice();
+            }
+            lapricesum.setText(Long.toString(sum));
+        }
+            
         
         lausername.setText(userdto.getName()+" 고객님");
         lausername2.setText(userdto.getName()+"님");

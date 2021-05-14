@@ -8,7 +8,10 @@ package com.bank.model;
 import com.bank.db.DBUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -38,4 +41,36 @@ public class AccountDAO {
         }
 
     }//insertUser();
+    
+    public List<AccountDTO> userAcList(int userno) throws SQLException{
+        Connection conn =null;
+        PreparedStatement ps=null;
+        ResultSet rs =null;
+        List<AccountDTO> listacdto= new ArrayList<>();;
+        
+        try {
+          
+            conn = DBUtil.getConnection();
+       
+            String sql = "select * from account where userno=?";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, userno);
+
+            rs = ps.executeQuery();
+            AccountDTO acdto = new AccountDTO();
+            
+            if(rs.next()){
+                acdto.setAccountno(rs.getLong(1));
+                acdto.setAcpwd(rs.getInt(2));
+                acdto.setPrice(rs.getLong(3));
+                acdto.setTypeno(rs.getInt(4));
+                acdto.setUserno(rs.getInt(5));
+                acdto.setMakedate(rs.getTimestamp(6));
+            }
+            return listacdto;
+        }finally{
+            DBUtil.dbClose(rs, ps, conn);
+            
+        }
+    }
 }

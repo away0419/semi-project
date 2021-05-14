@@ -1,7 +1,7 @@
 /* »ç¿ëÀÚ */
 
 drop table account;
-drop table bankuser cascade constraint;
+drop table bankuser cascade constraints;
 drop table deal;
 drop table accounttype;
 drop sequence bankuser_seq;
