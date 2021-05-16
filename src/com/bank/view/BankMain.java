@@ -10,6 +10,9 @@ import com.bank.model.AccountDTO;
 import com.bank.model.BankUserDAO;
 import com.bank.model.BankUserDTO;
 import com.bank.model.BankUserService;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -19,7 +22,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -32,8 +38,10 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
     AccountDTO acdto;
     AccountDAO acdao;
     List<AccountDTO> listac;
+    JPanel[] plistac;
+    JButton[] btlistac;
+    JLabel[] lalistac;
     String loginid = BankUserService.getUserid();
-    
     
     /**
      * Creates new form bankMain
@@ -53,6 +61,8 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jEditorPane1 = new javax.swing.JEditorPane();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
@@ -63,7 +73,7 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
         jPanel8 = new javax.swing.JPanel();
         lausername = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        pactable = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -78,6 +88,8 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
         btaccountopen = new javax.swing.JButton();
         lapwdequals = new javax.swing.JLabel();
         lausername2 = new javax.swing.JLabel();
+
+        jScrollPane2.setViewportView(jEditorPane1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -137,17 +149,33 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
                 .addContainerGap(45, Short.MAX_VALUE))
         );
 
+        pactable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pactable.setMinimumSize(new java.awt.Dimension(722, 239));
+
+        javax.swing.GroupLayout pactableLayout = new javax.swing.GroupLayout(pactable);
+        pactable.setLayout(pactableLayout);
+        pactableLayout.setHorizontalGroup(
+            pactableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 720, Short.MAX_VALUE)
+        );
+        pactableLayout.setVerticalGroup(
+            pactableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 237, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(pactable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 2, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 360, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -159,7 +187,7 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+                .addComponent(pactable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -351,6 +379,7 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btaccountopen;
     private javax.swing.JComboBox<String> cbaccounttype;
+    private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -365,13 +394,14 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JLabel lapricesum;
     private javax.swing.JLabel lapwdequals;
     private javax.swing.JLabel lausername;
     private javax.swing.JLabel lausername2;
+    private javax.swing.JPanel pactable;
     private javax.swing.JPasswordField tfaccountpwd;
     private javax.swing.JPasswordField tfaccountpwdc;
     // End of variables declaration//GEN-END:variables
@@ -391,14 +421,20 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
             Logger.getLogger(BankMain.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        if(!(listac.isEmpty())){
+       
+        if(listac.isEmpty() || listac==null){
+            pactable.add(new JLabel("계좌가 없습니다."));
+            System.out.println("?");
+            
+        }else{
             long sum =0;
             for(AccountDTO n : listac){
                 sum+= n.getPrice();
             }
             lapricesum.setText(Long.toString(sum));
+            showlistac(listac.size());
         }
-            
+         
         
         lausername.setText(userdto.getName()+" 고객님");
         lausername2.setText(userdto.getName()+"님");
@@ -497,6 +533,37 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
             JOptionPane.showMessageDialog(this, "개설완료");
         }
         
+        
+    }
+
+    private void showlistac(int accnt) {
+        pactable.setLayout(new GridLayout(accnt,1));
+        plistac = new JPanel[accnt];
+        btlistac = new JButton[accnt];
+        lalistac = new JLabel[accnt];
+        
+        for(int i=0; i<plistac.length; i++){
+            plistac[i]=new JPanel();
+            plistac[i].setLayout(new GridLayout(1,3,100,20));
+            plistac[i].setSize(700,300);
+            
+            AccountDTO lacdto= new AccountDTO();
+            lacdto=listac.get(i);
+            String acnum = Long.toString(lacdto.getAccountno());
+            String acprice = Long.toString(lacdto.getPrice());
+            
+            lalistac[i]=new JLabel(" 계좌 : "+acnum);
+            plistac[i].add(lalistac[i]);
+            
+            lalistac[i]=new JLabel("잔액 : "+acprice+"원",JLabel.RIGHT);
+            plistac[i].add(lalistac[i]);
+            
+            btlistac[i]=new JButton("조회");
+            plistac[i].add(btlistac[i]);
+            
+            pactable.add(plistac[i]);
+            
+        }
         
     }
 }

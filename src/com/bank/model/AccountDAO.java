@@ -46,26 +46,28 @@ public class AccountDAO {
         Connection conn =null;
         PreparedStatement ps=null;
         ResultSet rs =null;
-        List<AccountDTO> listacdto= new ArrayList<>();;
+        List<AccountDTO> listacdto= new ArrayList<>();
         
         try {
           
             conn = DBUtil.getConnection();
        
-            String sql = "select * from account where userno=?";
+            String sql = "select * from account where userno=? order by accountno";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, userno);
 
             rs = ps.executeQuery();
-            AccountDTO acdto = new AccountDTO();
             
-            if(rs.next()){
+            while(rs.next()){
+                AccountDTO acdto = new AccountDTO();
                 acdto.setAccountno(rs.getLong(1));
                 acdto.setAcpwd(rs.getInt(2));
                 acdto.setPrice(rs.getLong(3));
                 acdto.setTypeno(rs.getInt(4));
                 acdto.setUserno(rs.getInt(5));
                 acdto.setMakedate(rs.getTimestamp(6));
+                
+                listacdto.add(acdto);
             }
             return listacdto;
         }finally{
@@ -73,4 +75,6 @@ public class AccountDAO {
             
         }
     }
+    
+    
 }
