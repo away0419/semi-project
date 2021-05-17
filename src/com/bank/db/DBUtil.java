@@ -28,15 +28,15 @@ public class DBUtil {
 	
 	public static Connection getConnection(String user, String upwd) 
 			throws SQLException {
-		//String url="jdbc:oracle:thin:@DESKTOP-ODVLIF8:1521:xe";
-                String url="jdbc:oracle:thin:@DESKTOP-44TMEQO:1521:xe";
+		String url="jdbc:oracle:thin:@DESKTOP-ODVLIF8:1521:xe";
+               // String url="jdbc:oracle:thin:@DESKTOP-44TMEQO:1521:xe";
 		Connection conn=getConnection(url, user, upwd);
 		return conn;
 	}
 	
 	public static Connection getConnection() throws SQLException {
-		//String url="jdbc:oracle:thin:@DESKTOP-ODVLIF8:1521:xe";
-                String url="jdbc:oracle:thin:@DESKTOP-44TMEQO:1521:xe";
+		String url="jdbc:oracle:thin:@DESKTOP-ODVLIF8:1521:xe";
+              //  String url="jdbc:oracle:thin:@DESKTOP-44TMEQO:1521:xe";
 		String user="javauser", upwd="javauser123";
 		Connection conn=getConnection(url, user, upwd);
 		return conn;
