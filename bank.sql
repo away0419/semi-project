@@ -10,7 +10,9 @@ drop sequence accounttype_seq;
 drop sequence account_seq;
 --select * from bankuser;
 --select * from account;
+--select * from account where userno=1;
 --select * from accounttype;
+--select * from deal;
 
 CREATE TABLE bankuser (
 	userNo NUMBER NOT NULL, /* 사용자번호 */
@@ -147,3 +149,8 @@ ALTER TABLE account
 			userNo
 		);
 		
+        
+insert into bankuser values(bankuser_seq.nextval,'ddd','ddd','관리자',1000000000000,'000-0000-0000',null,default);
+insert into account values(account_seq.nextval,0000,1000000,1,1,default);
+
+commit;

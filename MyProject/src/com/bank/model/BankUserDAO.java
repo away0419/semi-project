@@ -203,4 +203,28 @@ public class BankUserDAO {
             
         }
     }
+     
+     public String selectNameByNo(int no) throws SQLException{
+        Connection conn =null;
+        PreparedStatement ps=null;
+        ResultSet rs =null;
+        String name="";
+        try {
+            
+            conn = DBUtil.getConnection();
+       
+            String sql = "select username from bankuser where userno=?";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, no);
+
+            rs = ps.executeQuery();
+            if(rs.next()){
+                name=rs.getString(1);
+            }
+            return name;
+        }finally{
+            DBUtil.dbClose(rs, ps, conn);
+            
+        }
+    }//idCheck();
 }

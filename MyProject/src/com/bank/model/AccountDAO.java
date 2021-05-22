@@ -75,6 +75,7 @@ public class AccountDAO {
             
         }
     }
+    
     public int userAcCnt(int userno) throws SQLException{
         Connection conn =null;
         PreparedStatement ps=null;
@@ -102,4 +103,79 @@ public class AccountDAO {
         }
     }
     
+    public AccountDTO acInfo(String ac) throws SQLException{
+        Connection conn =null;
+        PreparedStatement ps=null;
+        ResultSet rs =null;
+        AccountDTO dto= null;
+        
+        try {
+          
+            conn = DBUtil.getConnection();
+       
+            String sql = "select * from account where accountno=?";
+            ps = conn.prepareStatement(sql);
+            ps.setLong(1, Long.parseLong(ac));
+
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                dto=new AccountDTO();
+                dto.setAccountno(rs.getLong(1));
+                dto.setAcpwd(rs.getInt(2));
+                dto.setPrice(rs.getLong(3));
+                dto.setTypeno(rs.getInt(4));
+                dto.setUserno(rs.getInt(5));
+                dto.setMakedate(rs.getTimestamp(6));
+            }
+            return dto;
+        }finally{
+            DBUtil.dbClose(rs, ps, conn);
+            
+        }
+    }
+    
+    public int sendPrice(long ac, long price) throws SQLException{
+        Connection conn =null;
+        PreparedStatement ps=null;
+        
+        try {
+            conn = DBUtil.getConnection();
+            
+            String sql = "update account set price=price - ? where accountno = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setLong(1, price);
+            ps.setLong(2, ac);
+            
+            
+            int j = ps.executeUpdate();
+            System.out.println("성공");
+            return j;
+        }finally{
+            DBUtil.dbClose(ps, conn);
+        }
+
+    }//sendPrice
+    
+    public int takePrice(long ac, long price) throws SQLException{
+        Connection conn =null;
+        PreparedStatement ps=null;
+        
+        try {
+            conn = DBUtil.getConnection();
+            
+            String sql = "update account set price=price + ? where accountno = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setLong(1, price);
+            ps.setLong(2, ac);
+            
+            
+            int j = ps.executeUpdate();
+            System.out.println("성공");
+            return j;
+        }finally{
+            DBUtil.dbClose(ps, conn);
+        }
+
+    }//takePrice
 }
