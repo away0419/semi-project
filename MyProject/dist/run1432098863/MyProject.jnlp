@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="MyProject_browser.jnlp">
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="MyProject.jnlp">
   <information>
     <title>MyProject</title>
     <vendor>ad</vendor>
@@ -8,9 +8,9 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="MyProject.jar" size="50630" download="eager" />
+    <jar href="MyProject.jar" size="47450" download="eager" />
   </resources>
-  <applet-desc  width="800" height="600" main-class="myproject.MyProject"  name="MyProject" >
-  </applet-desc>
+  <application-desc main-class="myproject.MyProject"  name="MyProject" >
+  </application-desc>
   <update check="always"/>
 </jnlp>
