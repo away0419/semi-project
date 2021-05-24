@@ -33,7 +33,9 @@ public class Login extends javax.swing.JFrame implements ActionListener{
         init();
         addMotion();
     }
-
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -255,6 +257,8 @@ public class Login extends javax.swing.JFrame implements ActionListener{
         IdPwdSearch i = new IdPwdSearch();
         i.setVisible(true);
     }
+
+    
 
 
 }

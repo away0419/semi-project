@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="MyProject.jar" size="50630" download="eager" />
+    <jar href="MyProject.jar" size="53844" download="eager" />
   </resources>
   <application-desc main-class="myproject.MyProject"  name="MyProject" >
   </application-desc>

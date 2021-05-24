@@ -13,6 +13,7 @@ import com.bank.model.BankUserService;
 import com.bank.model.DealDAO;
 import com.bank.model.DealDTO;
 import com.bank.thread.LoginActiveThread;
+import com.bank.thread.MyRenderer;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -41,6 +42,7 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -63,6 +65,7 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
      * Creates new form bankMain
      */
     public BankMain() {
+        super("은행");
         initComponents();
         init();
         addEvent();
@@ -127,6 +130,8 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
         lausername2 = new javax.swing.JLabel();
         laactivetime = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        btlogout = new javax.swing.JButton();
+        btmembermodify = new javax.swing.JButton();
 
         jScrollPane2.setViewportView(jEditorPane1);
 
@@ -214,7 +219,7 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 374, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -236,7 +241,7 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 762, Short.MAX_VALUE)
+            .addGap(0, 746, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,7 +324,7 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -375,7 +380,7 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
                     .addComponent(tfacpwd, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfpirce, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbwithdraw, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(502, Short.MAX_VALUE))
+                .addContainerGap(489, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -407,7 +412,7 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(tfdeposit, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(444, 444, 444))
         );
@@ -456,7 +461,7 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 884, Short.MAX_VALUE)
+            .addGap(0, 855, Short.MAX_VALUE)
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -497,7 +502,7 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(313, 313, 313)
                         .addComponent(btaccountopen)))
-                .addContainerGap(510, Short.MAX_VALUE))
+                .addContainerGap(485, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -529,6 +534,10 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
 
         jLabel8.setText("후 자동 로그아웃 됩니다.");
 
+        btlogout.setText("로그아웃");
+
+        btmembermodify.setText("회원 정보 수정");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -541,17 +550,23 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
                 .addComponent(laactivetime)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btmembermodify)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btlogout)
+                .addGap(27, 27, 27))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 43, Short.MAX_VALUE)
+                .addGap(0, 42, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lausername2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(laactivetime)
-                    .addComponent(jLabel8))
-                .addGap(30, 30, 30)
+                    .addComponent(jLabel8)
+                    .addComponent(btmembermodify)
+                    .addComponent(btlogout))
+                .addGap(29, 29, 29)
                 .addComponent(tpmain, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -595,6 +610,8 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btaccountopen;
+    private javax.swing.JButton btlogout;
+    private javax.swing.JButton btmembermodify;
     private javax.swing.JButton bttransfer;
     private javax.swing.JButton btviewac;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -664,7 +681,13 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
         lausername.setText(userdto.getName()+" 고객님");
         lausername2.setText(userdto.getName()+"님 ");
         
-        
+        BankUserService.setUseremail(userdto.getEmail());
+        BankUserService.setUserjoindate(userdto.getJoindate());
+        BankUserService.setUserjumin(userdto.getJumin());
+        BankUserService.setUsername(userdto.getName());
+        BankUserService.setUserno(userdto.getSeq());
+        BankUserService.setUserpwd(userdto.getPwd());
+        BankUserService.setUsertel(userdto.getTel());
         
         
     }
@@ -687,6 +710,12 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
         //계좌별 조회
         tpviewac.addMouseListener(this);
         btviewac.addActionListener(this);
+        
+        //로그아웃
+        btlogout.addActionListener(this);
+        
+        //회원정보수정
+        btmembermodify.addActionListener(this);
     }
 
     
@@ -704,6 +733,14 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
             
             else if(e.getSource()==btviewac){//계좌별 조회 버튼 이벤트
                 acview();
+            }
+            
+            else if(e.getSource()==btlogout){
+                logout();
+            }
+            
+            else if (e.getSource()==btmembermodify){
+                membermodify();
             }
             
         } catch (SQLException ex) {
@@ -848,7 +885,6 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
                
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    System.out.println("aaaaa");
                     acviewinit();
                     cbviewac.setSelectedItem(acnum);
                     try {
@@ -970,6 +1006,15 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
         if(depositac==null){
             JOptionPane.showMessageDialog(this, "받는분의 계좌번호가 없습니다.","계좌 이체",JOptionPane.INFORMATION_MESSAGE);
             return;
+        }else{
+            String dname= dao.selectNameByNo(depositac.getUserno());
+            int transType=JOptionPane.showConfirmDialog(this, "받는분 : "+dname+"\n계좌번호 : "+depositac.getAccountno()+"\n이체하시겠습니까?","이체",
+                JOptionPane.YES_NO_OPTION);
+            
+            if(transType==JOptionPane.NO_OPTION){
+                JOptionPane.showMessageDialog(this, "취소하였습니다.");
+                return;
+            }
         }
         
         DealDTO dealdto= new DealDTO();
@@ -1046,12 +1091,56 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
         tbviewac.getColumnModel().getColumn(3).setPreferredWidth(60);
         
         
-        DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
-        dtcr.setHorizontalAlignment(SwingConstants.RIGHT);
-        tbviewac.getColumnModel().getColumn(2).setCellRenderer(dtcr);
+        DefaultTableCellRenderer ren = new MyRenderer();
+        ren.setHorizontalAlignment(SwingConstants.RIGHT);
+        tbviewac.getColumnModel().getColumn(2).setCellRenderer(ren);
         
+//        try {
+//            tbviewac.setDefaultRenderer(Class.forName("java.lang.Object"), ren);
+//            
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(BankMain.class.getName()).log(Level.SEVERE, null, ex);
+//        }    
+//        DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
+//        dtcr.setHorizontalAlignment(SwingConstants.RIGHT);
+//        tbviewac.getColumnModel().getColumn(2).setCellRenderer(dtcr);
     }
     
+    //클리어
+    public void cleartpmain1(){
+        tfacpwd.setText("");
+        tfpirce.setText("");
+        tfdeposit.setText("");
+        cbwithdraw.setSelectedIndex(0);
+    }
+ 
+    //클리어
+    public void cleartpmain3(){
+        tfaccountpwd.setText("");
+        tfaccountpwdc.setText("");
+        cbaccounttype.setSelectedIndex(0);
+    }
+ 
+    //클리어
+    public void cleartbviewac2(){
+        DefaultTableModel model = new DefaultTableModel();  
+        cbviewac.setSelectedItem(0);
+    }
+    
+    //로그아웃
+    private void logout() {
+        Login login = new Login();
+        lat.stop();
+        this.dispose();
+        login.setVisible(true);
+    }
+    
+    //정보수정
+    private void membermodify() {
+        Join join = new Join(2);
+        join.setVisible(true);
+        
+    }
 //--------------------------------------------------------------------mouseListener---------------------------------------------------------------------------------
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -1061,30 +1150,25 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
                 if(index==0 && !nowview.equals("tpmain0")){
                     listacinit();
                     nowview="tpmain0";
-                    clear();
                 }else if(index==1 && !nowview.equals("tpmain1")){
                     tansferinit();
                     nowview="tpmain1";
-                    clear();
-                }else if(index==2 && !nowview.equals("tpmain2")){
-                    
+                    cleartpmain1();
+                }else if(index==2 && !nowview.equals("tpmain2")){                   
                     nowview="tpmain2";
-                    clear();
-                }else if(index==3 && !nowview.equals("tpmain3")){
-                    
+                }else if(index==3 && !nowview.equals("tpmain3")){                   
                     nowview="tpmain3";
-                    clear();
+                    cleartpmain3();
                 }
         }else if(e.getSource()==tpviewac ){
                 int index =((JTabbedPane)e.getSource()).getSelectedIndex();
-                if(index==0 && !nowview.equals("tpmain0")){
+                if(index==0 && !nowview.equals("tpviewac0")){
                     listacinit();
-                    nowview="tpmain0";
-                    clear();
+                    nowview="tpviewac0";
                 }else if(index==2 && !nowview.equals("tpviewac2")){
                     acviewinit();
                     nowview="tpviewac2";
-                    clear();
+                    cleartbviewac2();
                 }
         }
     }
@@ -1106,19 +1190,6 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
     }
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    public void clear(){
-        DefaultTableModel model = new DefaultTableModel();  
-        tbviewac.setModel(model);
-        tfacpwd.setText("");
-        tfpirce.setText("");
-        tfdeposit.setText("");
-        tfaccountpwd.setText("");
-        tfaccountpwdc.setText("");
-        cbaccounttype.setSelectedIndex(0);
-        cbviewac.setSelectedItem(0);
-        cbwithdraw.setSelectedIndex(0);
-    }
-
-  
+    
     
 }

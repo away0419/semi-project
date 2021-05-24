@@ -13,6 +13,8 @@ drop sequence account_seq;
 --select * from account where userno=1;
 --select * from accounttype;
 --select * from deal;
+--update account set price=10000000
+--where accountno=1000000000003;
 
 CREATE TABLE bankuser (
 	userNo NUMBER NOT NULL, /* 사용자번호 */

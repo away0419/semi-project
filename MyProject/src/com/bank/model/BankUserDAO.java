@@ -42,7 +42,7 @@ public class BankUserDAO {
             DBUtil.dbClose(ps, conn);
         }
 
-    }//insertUser();
+    }
     
     public boolean userLogin(BankUserDTO dto) throws SQLException{
         Connection conn =null;
@@ -69,7 +69,7 @@ public class BankUserDAO {
         }finally{
             DBUtil.dbClose(rs, ps, conn);
         }
-    }//userLogin();
+    }
     
     public boolean idCheck(String id) throws SQLException{
         Connection conn =null;
@@ -93,7 +93,7 @@ public class BankUserDAO {
             DBUtil.dbClose(rs, ps, conn);
             
         }
-    }//idCheck();
+    }
     
     public boolean juminCheck(String jumin) throws SQLException{
         Connection conn =null;
@@ -118,7 +118,7 @@ public class BankUserDAO {
             DBUtil.dbClose(rs, ps, conn);
             
         }
-    }//idCheck();
+    }
     
     public boolean namejuminCheck(String name, String jumin) throws SQLException{
         Connection conn =null;
@@ -171,8 +171,7 @@ public class BankUserDAO {
         }
     }
     
-    
-     public BankUserDTO loginUser(String id) throws SQLException{
+    public BankUserDTO loginUser(String id) throws SQLException{
         Connection conn =null;
         PreparedStatement ps=null;
         ResultSet rs =null;
@@ -204,7 +203,7 @@ public class BankUserDAO {
         }
     }
      
-     public String selectNameByNo(int no) throws SQLException{
+    public String selectNameByNo(int no) throws SQLException{
         Connection conn =null;
         PreparedStatement ps=null;
         ResultSet rs =null;
@@ -226,5 +225,28 @@ public class BankUserDAO {
             DBUtil.dbClose(rs, ps, conn);
             
         }
-    }//idCheck();
+    }
+    
+    public int updateUser(BankUserDTO dto) throws SQLException{
+        Connection conn =null;
+        PreparedStatement ps=null;
+        System.out.println("aaaaa");
+        try {
+            conn = DBUtil.getConnection();
+            
+            String sql = "update bankuser set userpwd=?, tel=?, email=? where userno=?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, dto.getPwd());
+            ps.setString(2, dto.getTel());
+            ps.setString(3, dto.getEmail());
+            ps.setInt(4, dto.getSeq());
+            
+            int j = ps.executeUpdate();
+            
+            return j;
+        }finally{
+            DBUtil.dbClose(ps, conn);
+        }
+
+    }
 }

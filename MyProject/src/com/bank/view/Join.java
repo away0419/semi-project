@@ -7,6 +7,7 @@ package com.bank.view;
 
 import com.bank.model.BankUserDAO;
 import com.bank.model.BankUserDTO;
+import com.bank.model.BankUserService;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -32,6 +33,9 @@ public class Join extends javax.swing.JFrame implements ActionListener, KeyListe
     final static private int ID_OVERLAP = 2;
     final static private int JUMIN_NEW = 1;
     final static private int JUMIN_OVERLAP = 2;
+    public static final int MEMBER_REGISTER=1;  //회원가입
+    public static final int MEMBER_EDIT=2;  //회원정보수정
+    private int flag=MEMBER_REGISTER;
     
     
     /**
@@ -43,7 +47,12 @@ public class Join extends javax.swing.JFrame implements ActionListener, KeyListe
         init();
         addMotion();
     }
-
+    
+    public Join(int flag){
+        this();
+        this.flag=flag;
+        memberforc();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -296,7 +305,10 @@ public class Join extends javax.swing.JFrame implements ActionListener, KeyListe
     public void actionPerformed(ActionEvent e) {
         try {
             if(e.getSource()==btjoin){
-                ujoin();
+                if(flag==MEMBER_REGISTER)
+                    ujoin();
+                else if(flag==MEMBER_EDIT)
+                    umodify();
             }else if(e.getSource()==btoverlap){
                 idcheck();
             }else if(e.getSource()==btcancel){
@@ -535,6 +547,80 @@ public class Join extends javax.swing.JFrame implements ActionListener, KeyListe
         return bool;
     }
     
+    private void memberforc() {
+        if(flag==MEMBER_EDIT){ //회원수정
+            setTitle("회원 정보 수정");
+            setEditing();
+            showByUser();
+        }
+    }
 
+    private void setEditing() {
+        tfid.setEnabled(false);
+        tfjumin1.setEnabled(false);
+        tfjumin2.setEnabled(false);
+        tfname.setEnabled(false);
+        btoverlap.setEnabled(false);
+    }
+
+    private void showByUser() {
+        tfid.setText(BankUserService.getUserid());
+        tfname.setText(BankUserService.getUsername());
+        String s = Long.toString(BankUserService.getUserjumin());
+        s=s.substring(0,6);
+        tfjumin1.setText(s);
+        
+    }
+
+    private void umodify() throws SQLException {
+        String pwd = tfpwd.getText();
+        String pwdcheck = tfpwdcheck.getText();
+        String tel1 =(String)cbtel1.getSelectedItem();
+        String tel2 = tftel2.getText();
+        String tel3 =tftel3.getText();
+        String email1 = tfemail1.getText();
+        String email2 = (String)cbemail2.getSelectedItem();
+        String email3 = tfemail3.getText();
+        String email="";
+        String tel="";
+        
+        if(pwd==null || pwd.isEmpty()){
+            JOptionPane.showMessageDialog(this, "비밀번호를 확인하세요","회원가입",JOptionPane.INFORMATION_MESSAGE);
+            tfpwd.requestFocus();
+            return;
+        }
+        if(pwdcheck==null || pwdcheck.isEmpty() || !(pwdcheck.equals(pwd))){
+            JOptionPane.showMessageDialog(this, "비밀번호를 확인하세요","회원가입",JOptionPane.INFORMATION_MESSAGE);
+            tfpwdcheck.requestFocus();
+            return;
+        }
+
+        if(tel2==null || tel2.isEmpty() || tel3==null || tel3.isEmpty()){
+            JOptionPane.showMessageDialog(this, "전화번호를 확인하세요","회원가입",JOptionPane.INFORMATION_MESSAGE);
+            tftel2.requestFocus();
+            return;
+        }
+        
+        tel=tel1+"-"+tel2+"-"+tel3;
+        if(email2.equals("직접입력"))
+            email=email1+"@"+email3;
+        else
+            email=email1+"@"+email2;
+        
+
+        
+        dto.setPwd(pwd);
+        dto.setEmail(email);
+        dto.setTel(tel);
+        dto.setSeq(BankUserService.getUserno());
+        System.out.println(dto.getSeq());
+        
+        int j = dao.updateUser(dto);
+            
+        if(j>0){
+            JOptionPane.showMessageDialog(this, "수정완료","회원 정보 수정",JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+        }
+    }
     
 }
