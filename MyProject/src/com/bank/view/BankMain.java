@@ -21,11 +21,14 @@ import java.awt.GridLayout;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +51,7 @@ import javax.swing.table.TableCellRenderer;
  *
  * @author ad
  */
-public class BankMain extends javax.swing.JFrame implements ActionListener, KeyListener, MouseListener{
+public class BankMain extends javax.swing.JFrame implements ActionListener, KeyListener, MouseListener,ItemListener{
     BankUserDTO dto;
     BankUserDAO dao;
     BankUserDTO userdto;
@@ -100,9 +103,11 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         cbviewac = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
         btviewac = new javax.swing.JButton();
+        tfdate1 = new javax.swing.JTextField();
+        tfdate2 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        checkdate = new javax.swing.JCheckBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbviewac = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
@@ -204,7 +209,7 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
         );
         pactableLayout.setVerticalGroup(
             pactableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 242, Short.MAX_VALUE)
+            .addGap(0, 253, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -245,7 +250,7 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 376, Short.MAX_VALUE)
+            .addGap(0, 392, Short.MAX_VALUE)
         );
 
         tpviewac.addTab("거래내역 조회", jPanel5);
@@ -254,13 +259,17 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
 
         jLabel6.setText("계좌번호");
 
-        jLabel7.setText("jLabel7");
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLabel7.setText("날짜");
 
         btviewac.setText("조회");
+
+        jLabel10.setText("~");
+
+        checkdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkdateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -276,12 +285,16 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
                         .addComponent(jLabel6)
                         .addGap(36, 36, 36)))
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbviewac, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(cbviewac, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tfdate1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfdate2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(checkdate, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 219, Short.MAX_VALUE)
                 .addComponent(btviewac)
                 .addGap(68, 68, 68))
         );
@@ -295,14 +308,17 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
                             .addComponent(jLabel6)
                             .addComponent(cbviewac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7)))
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel7)
+                                .addComponent(tfdate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tfdate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel10))
+                            .addComponent(checkdate)))
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addComponent(btviewac)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         tbviewac.setModel(new javax.swing.table.DefaultTableModel(
@@ -573,6 +589,10 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void checkdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkdateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_checkdateActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -618,10 +638,10 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
     private javax.swing.JComboBox<String> cbaccounttype;
     private javax.swing.JComboBox<String> cbviewac;
     private javax.swing.JComboBox<String> cbwithdraw;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JCheckBox checkdate;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
@@ -657,6 +677,8 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
     private javax.swing.JPasswordField tfaccountpwd;
     private javax.swing.JPasswordField tfaccountpwdc;
     private javax.swing.JPasswordField tfacpwd;
+    private javax.swing.JTextField tfdate1;
+    private javax.swing.JTextField tfdate2;
     private javax.swing.JTextField tfdeposit;
     private javax.swing.JTextField tfpirce;
     private javax.swing.JTabbedPane tpmain;
@@ -680,6 +702,8 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
         
         lausername.setText(userdto.getName()+" 고객님");
         lausername2.setText(userdto.getName()+"님 ");
+        tfdate1.setEnabled(false);
+        tfdate2.setEnabled(false);
         
         BankUserService.setUseremail(userdto.getEmail());
         BankUserService.setUserjoindate(userdto.getJoindate());
@@ -710,12 +734,16 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
         //계좌별 조회
         tpviewac.addMouseListener(this);
         btviewac.addActionListener(this);
-        
+        tfdate1.addKeyListener(this);
+        tfdate2.addKeyListener(this);
+        checkdate.addItemListener(this);
         //로그아웃
         btlogout.addActionListener(this);
         
         //회원정보수정
         btmembermodify.addActionListener(this);
+        
+        
     }
 
     
@@ -816,6 +844,27 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
             else if(s.length()>13){
                 s=s.substring(0,13);
                 tfdeposit.setText(s);
+            }
+        }
+        else if(e.getSource()==tfdate1){// 계좌 조회
+            Join j = new Join();
+            String s = tfdate1.getText();
+            if(!(j.digitcheck(s))){
+                tfdate1.setText("");
+            }
+            else if(s.length()>8){
+                s=s.substring(0,8);
+                tfdate1.setText(s);
+            }
+        }else if(e.getSource()==tfdate2){// 계좌 조회
+            Join j = new Join();
+            String s = tfdate2.getText();
+            if(!(j.digitcheck(s))){
+                tfdate2.setText("");
+            }
+            else if(s.length()>8){
+                s=s.substring(0,8);
+                tfdate2.setText(s);
             }
         }
         
@@ -1060,11 +1109,29 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
     //계좌별 조회
     private void acview() throws SQLException { 
         String dealac = (String)cbviewac.getSelectedItem();
-        List<DealDTO> listdto= dealdao.selectDealByAc(dealac);
+        List<DealDTO> listdto;
+        
+        
+         if(!checkdate.isSelected()){
+            listdto= dealdao.selectDealByAc(dealac);
+         }else{
+            String date2 = tfdate2.getText();
+            String date1 = tfdate1.getText();
+      
+            if(date1.length()<8 || date2.length()<8 || !datecheck(date1) || !datecheck(date2) || Long.parseLong(date1)>Long.parseLong(date2)){
+                JOptionPane.showMessageDialog(this, "잘못된 날짜 형식입니다.","계좌 조회",JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            listdto=dealdao.selectDealByAcDate(dealac, date1, date2);
+         }
         
         String[] colNames={"상대방 이름","상대방 계좌","금액","날짜"};
         Object[][] data = new Object[listdto.size()][colNames.length];
         System.out.println(listdto.size());
+        
+       
+            
+        
         
         for(int i=0; i<listdto.size(); i++){
             DealDTO ddto= listdto.get(i);
@@ -1079,7 +1146,9 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
                 data[i][1]= ddto.getSendac();
                 data[i][2]= ddto.getSendprice();
                 data[i][3]= ddto.getDealdate();
+                
             }
+            
         }
         DefaultTableModel model = new DefaultTableModel();
         model.setDataVector(data, colNames);  
@@ -1188,8 +1257,51 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
     @Override
     public void mouseExited(MouseEvent e) {
     }
+//----------------------------------------------------------------------------itemListener-------------------------------------------------------------------------------------    
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        if(e.getSource()==checkdate){
+            if(e.getStateChange()==ItemEvent.SELECTED){
+                tfdate1.setEnabled(true);
+                tfdate2.setEnabled(true);
+            }else{
+                tfdate1.setEnabled(false);
+                tfdate2.setEnabled(false);
+            }
+        }
+    }
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    
+    public boolean datecheck(String date){
+        boolean bool = true;
+        int year = Integer.parseInt(date.substring(0,4));
+        int month = Integer.parseInt(date.substring(4,6));
+        int day = Integer.parseInt(date.substring(6,8));
+        
+        if(month>12 || month<1 || day>31 || day<1)
+            return false;
+        
+        switch(month){
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                if(day>30)
+                    bool = false;
+                break;
+            case 2:
+                if((year % 4 == 0 && year % 100 != 0) || year % 400 == 0 ){
+                    if(day>29)
+                        bool = false;
+                }
+                else{
+                    if(day>28)
+                        bool = false;
+                }
+                break;
+        }
+        return bool;
+    }
+
     
 }
