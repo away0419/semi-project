@@ -5,19 +5,21 @@
         <group>
             <file>file:/D:/lecture/workspace_list/nb_ws/MyProject/src/com/bank/model/BankUserDTO.java</file>
             <file>file:/D:/lecture/workspace_list/nb_ws/MyProject/src/com/bank/thread/UserThread.java</file>
+            <file>file:/D:/lecture/workspace_list/nb_ws/MyProject/src/com/bank/model/DealDTO.java</file>
             <file>file:/D:/lecture/workspace_list/nb_ws/MyProject/src/myproject/MyProject.java</file>
-            <file>file:/D:/lecture/workspace_list/nb_ws/MyProject/src/com/bank/model/BankUserDAO.java</file>
             <file>file:/D:/lecture/workspace_list/nb_ws/MyProject/src/com/bank/view/BankMain.java</file>
+            <file>file:/D:/lecture/workspace_list/nb_ws/MyProject/src/com/bank/model/BankUserDAO.java</file>
             <file>file:/D:/lecture/workspace_list/nb_ws/MyProject/src/com/bank/model/BankUserService.java</file>
             <file>file:/D:/lecture/workspace_list/nb_ws/MyProject/src/com/bank/thread/MyRenderer.java</file>
             <file>file:/D:/lecture/workspace_list/nb_ws/MyProject/src/com/bank/view/Login.java</file>
             <file>file:/D:/lecture/workspace_list/nb_ws/MyProject/src/com/bank/thread/AdminThread.java</file>
-            <file>file:/D:/lecture/workspace_list/nb_ws/MyProject/src/com/bank/view/Join.java</file>
             <file>file:/D:/lecture/workspace_list/nb_ws/MyProject/src/com/bank/model/AccountDTO.java</file>
+            <file>file:/D:/lecture/workspace_list/nb_ws/MyProject/src/com/bank/view/Join.java</file>
             <file>file:/D:/lecture/workspace_list/nb_ws/MyProject/src/com/bank/model/AccountDAO.java</file>
             <file>file:/D:/lecture/workspace_list/nb_ws/MyProject/src/com/bank/thread/LoginActiveThread.java</file>
             <file>file:/D:/lecture/workspace_list/nb_ws/MyProject/src/com/bank/db/DBUtil.java</file>
             <file>file:/D:/lecture/workspace_list/nb_ws/MyProject/src/com/bank/view/IdPwdSearch.java</file>
+            <file>file:/D:/lecture/workspace_list/nb_ws/MyProject/src/com/bank/model/DealDAO.java</file>
         </group>
     </open-files>
 </project-private>

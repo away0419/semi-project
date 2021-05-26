@@ -151,19 +151,26 @@ ALTER TABLE account
 		);
 		
         
-insert into bankuser values(bankuser_seq.nextval,'admin','admin','admin',0000000000000,'000-0000-0000',null,default);
-insert into account values(account_seq.nextval,1111,1000000,1,1,default);
+insert into bankuser values(bankuser_seq.nextval,'admin','admin','admin',0000000000000,'000-0000-0000',null,'20000101');
+insert into account values(account_seq.nextval,1111,1000000,1,1,'20000101');
 
-insert into bankuser values(bankuser_seq.nextval,'aaa','aaa','ȫ�浿',9504051000212,'010-1111-1111',null,default);
-insert into account values(account_seq.nextval,1111,1000000,1,2,default);
-insert into account values(account_seq.nextval,1111,1000000,1,2,default);
-insert into account values(account_seq.nextval,1111,1000000,1,2,default);
+insert into bankuser values(bankuser_seq.nextval,'aaa','aaa','ȫ�浿',9504051000212,'010-1111-1111',null,'20000101');
+insert into account values(account_seq.nextval,1111,1000000,1,2,'20000101');
+insert into account values(account_seq.nextval,1111,1000000,1,2,'20000101');
+insert into account values(account_seq.nextval,1111,1000000,1,2,'20000101');
 
-insert into deal values(deal_seq.nextval,1000000000000,1000000000001,1000,1000,'admin','aaa','20210520');
-insert into deal values(deal_seq.nextval,1000000000000,1000000000001,2000,2000,'admin','aaa','20210521');
-insert into deal values(deal_seq.nextval,1000000000001,1000000000000,1000,1000,'aaa','admin','20210522');
-insert into deal values(deal_seq.nextval,1000000000000,1000000000001,2000,2000,'admin','aaa','20210523');
-insert into deal values(deal_seq.nextval,1000000000001,1000000000000,1000,1000,'aaa','admin','20210524');
+insert into deal values(deal_seq.nextval,1000000000000,1000000000001,1000,1000,'admin','ȫ�浿','20020520');
+insert into deal values(deal_seq.nextval,1000000000000,1000000000001,2000,2000,'admin','ȫ�浿','20020521');
+insert into deal values(deal_seq.nextval,1000000000001,1000000000000,1000,1000,'ȫ�浿','admin','20020522');
+insert into deal values(deal_seq.nextval,1000000000000,1000000000001,2000,2000,'admin','ȫ�浿','20020523');
+insert into deal values(deal_seq.nextval,1000000000001,1000000000000,1000,1000,'ȫ�浿','admin','20020524');
+
+insert into deal values(deal_seq.nextval,1000000000000,1000000000001,1000,1000,'admin','ȫ�浿','20210520');
+insert into deal values(deal_seq.nextval,1000000000000,1000000000001,2000,2000,'admin','ȫ�浿','20210521');
+insert into deal values(deal_seq.nextval,1000000000001,1000000000000,1000,1000,'ȫ�浿','admin','20210522');
+insert into deal values(deal_seq.nextval,1000000000000,1000000000001,2000,2000,'admin','ȫ�浿','20210523');
+insert into deal values(deal_seq.nextval,1000000000001,1000000000000,1000,1000,'ȫ�浿','admin','20210524');
+
 
 --select * from account;
 commit;

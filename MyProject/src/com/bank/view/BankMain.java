@@ -29,6 +29,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
@@ -69,6 +70,11 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
     LoginActiveThread lat;
     AdminThread adth;
     UserThread userth;
+    JPanel[] pcals;
+    JLabel[][] lacalss;
+    int year;
+    int month;
+    int day;
     /**
      * Creates new form bankMain
      */
@@ -76,6 +82,7 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
         super("은행");
         initComponents();
         init();
+        calviewinit();
         addEvent();
     }
 
@@ -91,6 +98,7 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
         jScrollPane2 = new javax.swing.JScrollPane();
         jEditorPane1 = new javax.swing.JEditorPane();
         buttonGroup1 = new javax.swing.ButtonGroup();
+        jLabel11 = new javax.swing.JLabel();
         tpmain = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         tpviewac = new javax.swing.JTabbedPane();
@@ -103,7 +111,10 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
         jLabel2 = new javax.swing.JLabel();
         pactable = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        pcal = new javax.swing.JPanel();
+        ppcal = new javax.swing.JPanel();
+        cbcalyear = new javax.swing.JComboBox<>();
+        cbcalmonth = new javax.swing.JComboBox<>();
+        btcal = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -149,6 +160,8 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
         btmembermodify = new javax.swing.JButton();
 
         jScrollPane2.setViewportView(jEditorPane1);
+
+        jLabel11.setText("jLabel11");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -252,18 +265,24 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
 
         tpviewac.addTab("계좌조회", jPanel4);
 
-        pcal.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        ppcal.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        javax.swing.GroupLayout pcalLayout = new javax.swing.GroupLayout(pcal);
-        pcal.setLayout(pcalLayout);
-        pcalLayout.setHorizontalGroup(
-            pcalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout ppcalLayout = new javax.swing.GroupLayout(ppcal);
+        ppcal.setLayout(ppcalLayout);
+        ppcalLayout.setHorizontalGroup(
+            ppcalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 734, Short.MAX_VALUE)
         );
-        pcalLayout.setVerticalGroup(
-            pcalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 290, Short.MAX_VALUE)
+        ppcalLayout.setVerticalGroup(
+            ppcalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 323, Short.MAX_VALUE)
         );
+
+        cbcalyear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        cbcalmonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+
+        btcal.setText("조회");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -271,14 +290,27 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pcal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ppcal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(251, 251, 251)
+                .addComponent(cbcalyear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(cbcalmonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(btcal)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(pcal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(5, 5, 5)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbcalyear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbcalmonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btcal))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ppcal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(25, 25, 25))
         );
 
@@ -681,18 +713,22 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btaccountopen;
     private javax.swing.JButton btadvice;
+    private javax.swing.JButton btcal;
     private javax.swing.JButton btlogout;
     private javax.swing.JButton btmembermodify;
     private javax.swing.JButton bttransfer;
     private javax.swing.JButton btviewac;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbaccounttype;
+    private javax.swing.JComboBox<String> cbcalmonth;
+    private javax.swing.JComboBox<String> cbcalyear;
     private javax.swing.JComboBox<String> cbviewac;
     private javax.swing.JComboBox<String> cbwithdraw;
     private javax.swing.JCheckBox checkdate;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
@@ -725,7 +761,7 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
     private javax.swing.JLabel lausername;
     private javax.swing.JLabel lausername2;
     private javax.swing.JPanel pactable;
-    private javax.swing.JPanel pcal;
+    private javax.swing.JPanel ppcal;
     private javax.swing.JTextArea taadvice;
     private javax.swing.JTable tbviewac;
     private javax.swing.JPasswordField tfaccountpwd;
@@ -804,6 +840,9 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
         //회원정보수정
         btmembermodify.addActionListener(this);
         
+        //거래내역 조회
+        btcal.addActionListener(this);
+        
         
     }
 
@@ -832,6 +871,9 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
                 membermodify();
             }
             
+            else if (e.getSource()==btcal){
+                calview();
+            }
         } catch (SQLException ex) {
             Logger.getLogger(BankMain.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1188,7 +1230,7 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
         
         String[] colNames={"상대방 이름","상대방 계좌","금액","날짜"};
         Object[][] data = new Object[listdto.size()][colNames.length];
-        System.out.println(listdto.size());
+        
         
        
             
@@ -1236,6 +1278,110 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
 //        tbviewac.getColumnModel().getColumn(2).setCellRenderer(dtcr);
     }
     
+    //겨래내역 조회 화면
+    private void calviewinit(){
+        Calendar today = Calendar.getInstance();
+        year = today.get(Calendar.YEAR);
+        month = today.get(Calendar.MONTH);
+        pcals = new JPanel[49];
+        lacalss = new JLabel[49][3];
+
+        ppcal.setLayout(new GridLayout(7,7,1,1));
+        ppcal.setBackground(Color.black);
+        String[] sweek = {"일","월","화","수","목","금","토"};
+        DefaultComboBoxModel yearModel = new DefaultComboBoxModel();
+        
+        for(int i=year-100; i<=year+50; i++){
+            yearModel.addElement(i);
+        }
+        cbcalyear.setModel(yearModel);
+        cbcalyear.setSelectedItem(year);
+        cbcalmonth.setSelectedItem(Integer.toString(month+1));
+        
+        
+        for(int i=0; i<7; i++){
+            pcals[i]=new JPanel();
+            pcals[i].setLayout(new GridLayout(3, 1));
+            for(int j=0; j<3; j++){
+                lacalss[i][j]=new JLabel("",JLabel.CENTER);
+                pcals[i].add(lacalss[i][j]);
+            }
+            ppcal.add(pcals[i]);
+        }
+        
+        for(int i=7; i<49; i++){
+            pcals[i]=new JPanel();
+            pcals[i].setLayout(new GridLayout(3, 1));
+            for(int j=0; j<3; j++){
+                lacalss[i][j]=new JLabel();
+                pcals[i].add(lacalss[i][j]);
+            }
+            ppcal.add(pcals[i]);
+        }
+        
+        for(int i=0; i<7; i++){
+            if(i<7){
+                lacalss[i][0].setText(sweek[i]);
+                if(i==0)
+                    lacalss[i][0].setForeground(Color.red);
+                if(i==6)
+                    lacalss[i][0].setForeground(Color.blue);
+            }
+        }
+        
+        try {
+            calview();
+        } catch (SQLException ex) {
+            Logger.getLogger(BankMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    //거래 내역
+    private void calview() throws SQLException{
+        Calendar calen = Calendar.getInstance();
+        int year1 =(int)cbcalyear.getSelectedItem();
+        int month1 =Integer.parseInt((String)cbcalmonth.getSelectedItem())-1;
+        calen.set(year1, month1, 1);
+        int endday = calen.getActualMaximum(Calendar.DAY_OF_MONTH);
+        int week = calen.get(Calendar.DAY_OF_WEEK)+6;   
+       
+        for(int i=7; i<49; i++){
+            for(int j=0; j<3; j++){
+                lacalss[i][j].setText("");
+            }
+        }
+        
+        
+        
+        for(int i=0; i<endday; i++){
+            lacalss[week+i][0].setText(Integer.toString(i+1));
+            if((week+i)%7==0){
+                lacalss[week+i][0].setForeground(Color.red);
+            }
+            else if((week+i)%7==6){
+                lacalss[week+i][0].setForeground(Color.blue);
+            }
+            Date d = new Date(year1-1900,month1,i+1);
+            int sendcnt = dealdao.sendCntByDate(BankUserService.getUsername(), d);
+            int takecnt = dealdao.takeCntByDate(BankUserService.getUsername(), d);
+            System.out.println(sendcnt);
+            if(sendcnt !=0){
+                lacalss[week+i][1].setText("보낸이체:"+sendcnt+"회");
+                lacalss[week+i][1].setForeground(Color.red);
+            }
+            if(takecnt !=0){
+                lacalss[week+i][2].setText("받은이체:"+takecnt+"회");
+                lacalss[week+i][2].setForeground(Color.blue);
+            }
+            
+        }
+        
+        
+        
+        
+    }
+    
     //클리어
     public void cleartpmain1(){
         tfacpwd.setText("");
@@ -1252,9 +1398,13 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
     }
  
     //클리어
-    public void cleartbviewac2(){
-        DefaultTableModel model = new DefaultTableModel();  
+    public void cleartpviewac2(){
         cbviewac.setSelectedItem(0);
+    }
+    
+    public void cleartpviewac1(){
+        cbcalmonth.setSelectedItem(month-1);
+        cbcalyear.setSelectedItem(year);
     }
     
     //로그아웃
@@ -1304,10 +1454,19 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
                 if(index==0 && !nowview.equals("tpviewac0")){
                     listacinit();
                     nowview="tpviewac0";
+                }else if(index==1 && !nowview.equals("tpviewac1")){
+                    try {
+                        calview();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(BankMain.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    nowview="tpviewac1";
+                    cleartpviewac1();
+                    
                 }else if(index==2 && !nowview.equals("tpviewac2")){
                     acviewinit();
                     nowview="tpviewac2";
-                    cleartbviewac2();
+                    cleartpviewac2();
                 }
         }
     }
@@ -1377,7 +1536,7 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
         JPanel[] pcals = new JPanel[49];
         JLabel[] lacals = new JLabel[49];
         String[] title={"일","월","화","수","목","금","토"};
-        pcal.setLayout(new GridLayout(7,7));
+        ppcal.setLayout(new GridLayout(7,7));
         
         Calendar today = Calendar.getInstance();
         
