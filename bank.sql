@@ -12,9 +12,8 @@ drop sequence account_seq;
 --select * from account;
 --select * from account where userno=1;
 --select * from accounttype;
---select * from deal;
---update account set price=10000000
---where accountno=1000000000003;
+--select * from deal order by dealdate desc;
+--select * from deal where sendaccount=1000000000003 or takeaccount=1000000000003 order by dealdate desc;
 
 CREATE TABLE bankuser (
 	userNo NUMBER NOT NULL, /* 사용자번호 */
@@ -152,7 +151,19 @@ ALTER TABLE account
 		);
 		
         
-insert into bankuser values(bankuser_seq.nextval,'ddd','ddd','관리자',1000000000000,'000-0000-0000',null,default);
-insert into account values(account_seq.nextval,0000,1000000,1,1,default);
+insert into bankuser values(bankuser_seq.nextval,'admin','admin','admin',0000000000000,'000-0000-0000',null,default);
+insert into account values(account_seq.nextval,1111,1000000,1,1,default);
 
+insert into bankuser values(bankuser_seq.nextval,'aaa','aaa','홍길동',9504051000212,'010-1111-1111',null,default);
+insert into account values(account_seq.nextval,1111,1000000,1,2,default);
+insert into account values(account_seq.nextval,1111,1000000,1,2,default);
+insert into account values(account_seq.nextval,1111,1000000,1,2,default);
+
+insert into deal values(deal_seq.nextval,1000000000000,1000000000001,1000,1000,'admin','aaa','20210520');
+insert into deal values(deal_seq.nextval,1000000000000,1000000000001,2000,2000,'admin','aaa','20210521');
+insert into deal values(deal_seq.nextval,1000000000001,1000000000000,1000,1000,'aaa','admin','20210522');
+insert into deal values(deal_seq.nextval,1000000000000,1000000000001,2000,2000,'admin','aaa','20210523');
+insert into deal values(deal_seq.nextval,1000000000001,1000000000000,1000,1000,'aaa','admin','20210524');
+
+--select * from account;
 commit;

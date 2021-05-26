@@ -12,8 +12,10 @@ import com.bank.model.BankUserDTO;
 import com.bank.model.BankUserService;
 import com.bank.model.DealDAO;
 import com.bank.model.DealDTO;
+import com.bank.thread.AdminThread;
 import com.bank.thread.LoginActiveThread;
 import com.bank.thread.MyRenderer;
+import com.bank.thread.UserThread;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -31,6 +33,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -64,6 +67,8 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
     String loginid = BankUserService.getUserid();
     String nowview ="";
     LoginActiveThread lat;
+    AdminThread adth;
+    UserThread userth;
     /**
      * Creates new form bankMain
      */
@@ -98,6 +103,7 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
         jLabel2 = new javax.swing.JLabel();
         pactable = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
+        pcal = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -123,6 +129,10 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
         tfdeposit = new javax.swing.JTextField();
         bttransfer = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        taadvice = new javax.swing.JTextArea();
+        tfadvice = new javax.swing.JTextField();
+        btadvice = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -242,15 +252,34 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
 
         tpviewac.addTab("계좌조회", jPanel4);
 
+        pcal.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        javax.swing.GroupLayout pcalLayout = new javax.swing.GroupLayout(pcal);
+        pcal.setLayout(pcalLayout);
+        pcalLayout.setHorizontalGroup(
+            pcalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 734, Short.MAX_VALUE)
+        );
+        pcalLayout.setVerticalGroup(
+            pcalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 290, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 746, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pcal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 392, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addComponent(pcal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(25, 25, 25))
         );
 
         tpviewac.addTab("거래내역 조회", jPanel5);
@@ -473,18 +502,39 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
 
         tpmain.addTab("이체", jPanel2);
 
+        taadvice.setColumns(20);
+        taadvice.setRows(5);
+        jScrollPane3.setViewportView(taadvice);
+
+        btadvice.setText("전송");
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 855, Short.MAX_VALUE)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 718, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                        .addComponent(tfadvice)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btadvice)))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 388, Short.MAX_VALUE)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfadvice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btadvice))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
-        tpmain.addTab("금융상품", jPanel9);
+        tpmain.addTab("1:1상담", jPanel9);
 
         jLabel1.setText("계좌 종류");
 
@@ -630,6 +680,7 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btaccountopen;
+    private javax.swing.JButton btadvice;
     private javax.swing.JButton btlogout;
     private javax.swing.JButton btmembermodify;
     private javax.swing.JButton bttransfer;
@@ -667,16 +718,20 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel laactivetime;
     private javax.swing.JLabel lapricesum;
     private javax.swing.JLabel lapwdequals;
     private javax.swing.JLabel lausername;
     private javax.swing.JLabel lausername2;
     private javax.swing.JPanel pactable;
+    private javax.swing.JPanel pcal;
+    private javax.swing.JTextArea taadvice;
     private javax.swing.JTable tbviewac;
     private javax.swing.JPasswordField tfaccountpwd;
     private javax.swing.JPasswordField tfaccountpwdc;
     private javax.swing.JPasswordField tfacpwd;
+    private javax.swing.JTextField tfadvice;
     private javax.swing.JTextField tfdate1;
     private javax.swing.JTextField tfdate2;
     private javax.swing.JTextField tfdeposit;
@@ -696,6 +751,7 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
         listac = new ArrayList<>();
         df = new DecimalFormat("###,###");
         
+        
         listacinit();
         lat = new LoginActiveThread(laactivetime,this);
         lat.start();
@@ -712,8 +768,13 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
         BankUserService.setUserno(userdto.getSeq());
         BankUserService.setUserpwd(userdto.getPwd());
         BankUserService.setUsertel(userdto.getTel());
+        adth = new AdminThread(taadvice,tfadvice,btadvice);
         
-        
+//        if(loginid.equals("admin")){
+//            adth = new AdminThread(taadvice,tfadvice,btadvice);
+//        }else{
+//            userth = new UserThread(taadvice,tfadvice,btadvice);
+//        }
     }
     
     private void addEvent() {
@@ -1223,7 +1284,16 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
                     tansferinit();
                     nowview="tpmain1";
                     cleartpmain1();
-                }else if(index==2 && !nowview.equals("tpmain2")){                   
+                }else if(index==2 && !nowview.equals("tpmain2")){
+                    if(loginid.equals("admin")){
+                        if(!adth.isAlive())
+                            adth.startserver();
+
+                    }else{
+                        userth = new UserThread(taadvice,tfadvice,btadvice);
+                        userth.startserver();
+                    }
+                        
                     nowview="tpmain2";
                 }else if(index==3 && !nowview.equals("tpmain3")){                   
                     nowview="tpmain3";
@@ -1303,5 +1373,23 @@ public class BankMain extends javax.swing.JFrame implements ActionListener, KeyL
         return bool;
     }
 
-    
+    public void makecal(){
+        JPanel[] pcals = new JPanel[49];
+        JLabel[] lacals = new JLabel[49];
+        String[] title={"일","월","화","수","목","금","토"};
+        pcal.setLayout(new GridLayout(7,7));
+        
+        Calendar today = Calendar.getInstance();
+        
+        int year = today.get(Calendar.YEAR);
+        int month = today.get(Calendar.MONTH);
+        int day = today.get(Calendar.DATE);
+        int week =today.get(Calendar.DAY_OF_WEEK)-1;
+        
+        for(int i=0; i<7; i++){
+            lacals[i] = new JLabel(title[i],JLabel.CENTER);
+        }
+        for(int i=week+7; i<49;i++){
+        }
+    }
 }
