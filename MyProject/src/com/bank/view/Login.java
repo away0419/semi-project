@@ -58,7 +58,7 @@ public class Login extends javax.swing.JFrame implements ActionListener{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\lecture\\workspace_list\\nb_ws\\MyProject\\images\\bank.jpg")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bank.jpg"))); // NOI18N
 
         laid.setText("아이디");
 
