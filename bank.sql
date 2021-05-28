@@ -158,6 +158,8 @@ insert into bankuser values(bankuser_seq.nextval,'aaa','aaa','ȫ�浿',9504051000
 insert into account values(account_seq.nextval,1111,1000000,1,2,'20000101');
 insert into account values(account_seq.nextval,1111,1000000,1,2,'20000101');
 insert into account values(account_seq.nextval,1111,1000000,1,2,'20000101');
+insert into account values(account_seq.nextval,1111,1000000,1,2,'20000101');
+insert into account values(account_seq.nextval,1111,1000000,1,2,'20000101');
 
 insert into deal values(deal_seq.nextval,1000000000000,1000000000001,1000,1000,'admin','ȫ�浿','20020520');
 insert into deal values(deal_seq.nextval,1000000000000,1000000000001,2000,2000,'admin','ȫ�浿','20020521');
@@ -170,7 +172,16 @@ insert into deal values(deal_seq.nextval,1000000000000,1000000000001,2000,2000,'
 insert into deal values(deal_seq.nextval,1000000000001,1000000000000,1000,1000,'ȫ�浿','admin','20210522');
 insert into deal values(deal_seq.nextval,1000000000000,1000000000001,2000,2000,'admin','ȫ�浿','20210523');
 insert into deal values(deal_seq.nextval,1000000000001,1000000000000,1000,1000,'ȫ�浿','admin','20210524');
+insert into deal values(deal_seq.nextval,1000000000001,1000000000000,1000,1000,'ȫ�浿','admin','20210524');
+insert into deal values(deal_seq.nextval,1000000000001,1000000000000,1000,1000,'ȫ�浿','admin','20210524');
+insert into deal values(deal_seq.nextval,1000000000001,1000000000000,1000,1000,'admin','ȫ�浿','20210524');
 
+
+insert into deal values(deal_seq.nextval,1000000000001,1000000000000,1000,1000,'ȫ�浿','admin','20210424');
+insert into deal values(deal_seq.nextval,1000000000000,1000000000001,2000,2000,'admin','ȫ�浿','20210423');
+insert into deal values(deal_seq.nextval,1000000000000,1000000000001,2000,2000,'admin','ȫ�浿','20210523');
+insert into deal values(deal_seq.nextval,1000000000000,1000000000001,2000,2000,'admin','ȫ�浿','20210523');
+insert into deal values(deal_seq.nextval,1000000000000,1000000000001,2000,2000,'admin','ȫ�浿','20210524');
 
 --select * from account;
 commit;
